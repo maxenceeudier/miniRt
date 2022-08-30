@@ -1,33 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   loop_event.c                                       :+:      :+:    :+:   */
+/*   calcul2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: meudier <meudier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/30 11:13:34 by meudier           #+#    #+#             */
-/*   Updated: 2022/08/29 10:32:45 by meudier          ###   ########.fr       */
+/*   Created: 2022/08/30 12:21:12 by meudier           #+#    #+#             */
+/*   Updated: 2022/08/30 18:44:48 by meudier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft.h"
+#include "../../ft.h"
 
-int	handle_event(t_vars *vars)
+t_vector	normalize(t_vector v1)
 {
-	(void)vars;
-	return (0);
+	return (float_x_vector(v1, 1 / norme(v1)));
 }
 
-int key_event(int keycode, t_vars *vars)
+float	scalaire_product(t_vector v1, t_vector v2)
 {
-	if (keycode == XK_Escape)
-		return (loop_end(vars));
-	return (0);
+	return (v1.x * v2.x + v1.y * v2.y + v1.z * v2.z);
 }
 
-int	loop_end(t_vars *vars)
+float	norme(t_vector v1)
 {
-	mlx_loop_end(vars->mlx);
-	//destroy(vars);
-	return (0);
+	return (sqrtf(scalaire_product(v1, v1)));
+}
+
+void	eq_vector(t_vector *v1, t_vector v2)
+{
+	v1->x = v2.x;
+	v1->y = v2.y;
+	v1->z = v2.z;
 }

@@ -6,7 +6,7 @@
 #    By: meudier <meudier@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/18 15:52:00 by meudier           #+#    #+#              #
-#    Updated: 2022/08/29 18:10:02 by meudier          ###   ########.fr        #
+#    Updated: 2022/08/30 18:03:12 by meudier          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,13 @@ CC = gcc -Wall -Wextra -Werror -g
 
 NAME = miniRt
 
-SRC = main.c split.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c  \
-	destroy.c loop_event.c check_extension.c init_data.c
+SRC = src/main.c \
+	src/get_next_line/get_next_line.c src/get_next_line/get_next_line_utils.c  \
+	src/tools/split.c src/tools/tools.c \
+	src/window/destroy.c src/window/loop_event.c \
+	src/parser/check.c src/parser/init_data.c src/parser/free_data.c \
+	src/parser/parser.c src/parser/parser_obj.c \
+	src/calcul/calcul1.c src/calcul/calcul2.c src/calcul/calcul3.c
 	
 
 OBJ = $(SRC:.c=.o)

@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_extension.c                                  :+:      :+:    :+:   */
+/*   destroy.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: meudier <meudier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/25 14:33:54 by meudier           #+#    #+#             */
-/*   Updated: 2022/08/29 18:41:24 by meudier          ###   ########.fr       */
+/*   Created: 2022/05/25 13:41:30 by meudier           #+#    #+#             */
+/*   Updated: 2022/08/30 11:18:15 by meudier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft.h"
+#include "../../ft.h"
 
-int	is_good_extension(char *str)
+int	destroy(t_vars *vars)
 {
-	char	*ext;
-	int		i;
-
-	i = 0;
-	ext = ".rt";
-	while (str && str[i] && str[i] != '.')
-		i++;
-	if (ft_strcmp(str + i, ext) == 0)
-		return (1);
+	mlx_destroy_window(vars->mlx, vars->win);
+	mlx_destroy_display(vars->mlx);
+	free (vars->mlx);
 	return (0);
 }
-

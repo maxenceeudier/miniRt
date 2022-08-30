@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   loop_event.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: meudier <meudier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/04 09:40:27 by meudier           #+#    #+#             */
-/*   Updated: 2022/05/05 16:06:05 by meudier          ###   ########.fr       */
+/*   Created: 2022/05/30 11:13:34 by meudier           #+#    #+#             */
+/*   Updated: 2022/08/30 18:06:27 by meudier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "../../ft.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdio.h>
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <fcntl.h>
-# include <stdlib.h>
-# include <string.h>
+int	handle_event(t_vars *vars)
+{
+	(void)vars;
+	return (0);
+}
 
-size_t	ft_strlen(const char *s);
-char	*ft_strdup(const char *s1);
-char	*ft_strjoin(char const *s1, char const *s2);
-char	*get_next_line(int fd);
+int	key_event(int keycode, t_vars *vars)
+{
+	if (keycode == XK_Escape)
+		return (loop_end(vars));
+	return (0);
+}
 
-#endif
+int	loop_end(t_vars *vars)
+{
+	mlx_loop_end(vars->mlx);
+	return (0);
+}

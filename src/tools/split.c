@@ -6,11 +6,11 @@
 /*   By: meudier <meudier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 17:29:14 by meudier           #+#    #+#             */
-/*   Updated: 2022/05/25 15:27:38 by meudier          ###   ########.fr       */
+/*   Updated: 2022/08/30 11:18:29 by meudier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft.h"
+#include "../../ft.h"
 
 static int	ft_get_size(char const *s, char c)
 {
