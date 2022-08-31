@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calcul3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: meudier <meudier@student.42.fr>            +#+  +:+       +#+        */
+/*   By: slahlou <slahlou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 17:28:27 by meudier           #+#    #+#             */
-/*   Updated: 2022/08/30 18:44:33 by meudier          ###   ########.fr       */
+/*   Updated: 2022/08/31 17:12:44 by slahlou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_matrix	get_transfo_matrix(t_vector cam_orig, t_vector cam_dir)
 	}
 	else
 		eq_vector(&matrix.right, cross_product(temp, matrix.forward));
-	eq_vector(&matrix.up, cross_product(matrix.forward, matrix.right));
+	eq_vector(&matrix.up, cross_product(matrix.right, matrix.forward));
 	eq_vector(&matrix.cam, cam_orig);
 	return (matrix);
 }
@@ -45,4 +45,12 @@ t_vector	vector_x_matrix(t_vector v, t_matrix m, int i)
 	rslt.y = v.x * m.right.y + v.y * m.up.y + v.z * m.forward.y + i * m.cam.y ;
 	rslt.z = v.x * m.right.z + v.y * m.up.z + v.z * m.forward.z + i * m.cam.z;
 	return (rslt);
+}
+
+void	eq_matrix(t_matrix *m1, t_matrix m2)
+{
+	eq_vector(&m1->right, m2.right);
+	eq_vector(&m1->up, m2.up);
+	eq_vector(&m1->forward, m2.forward);
+	eq_vector(&m1->cam, m2.cam);
 }

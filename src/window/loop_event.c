@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop_event.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: meudier <meudier@student.42.fr>            +#+  +:+       +#+        */
+/*   By: slahlou <slahlou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 11:13:34 by meudier           #+#    #+#             */
-/*   Updated: 2022/08/30 18:06:27 by meudier          ###   ########.fr       */
+/*   Updated: 2022/08/31 14:52:26 by slahlou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,11 @@
 
 int	handle_event(t_vars *vars)
 {
-	(void)vars;
+	if (vars->move)
+	{
+		vars->move = 0;
+		algo(vars);
+	}
 	return (0);
 }
 

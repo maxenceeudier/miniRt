@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: meudier <meudier@student.42.fr>            +#+  +:+       +#+         #
+#    By: slahlou <slahlou@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/18 15:52:00 by meudier           #+#    #+#              #
-#    Updated: 2022/08/30 18:03:12 by meudier          ###   ########.fr        #
+#    Updated: 2022/08/31 16:11:11 by slahlou          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC = gcc -Wall -Wextra -Werror -g
+CC = gcc -Wall -Wextra -Werror -lm -g
 
 NAME = miniRt
 
@@ -20,8 +20,9 @@ SRC = src/main.c \
 	src/window/destroy.c src/window/loop_event.c \
 	src/parser/check.c src/parser/init_data.c src/parser/free_data.c \
 	src/parser/parser.c src/parser/parser_obj.c \
-	src/calcul/calcul1.c src/calcul/calcul2.c src/calcul/calcul3.c
-	
+	src/calcul/calcul1.c src/calcul/calcul2.c src/calcul/calcul3.c src/calcul/intersection.c \
+	src/algo/algo.c
+
 
 OBJ = $(SRC:.c=.o)
 
@@ -47,4 +48,4 @@ fclean: clean
 re: clean fclean all
 
 
-.PHONY: re clean fclean 
+.PHONY: re clean fclean

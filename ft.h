@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: meudier <meudier@student.42.fr>            +#+  +:+       +#+        */
+/*   By: slahlou <slahlou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 17:30:42 by meudier           #+#    #+#             */
-/*   Updated: 2022/08/30 18:37:07 by meudier          ###   ########.fr       */
+/*   Updated: 2022/08/31 18:10:32 by slahlou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,15 @@
 # include <fcntl.h>
 # include <math.h>
 # include <stdio.h>
+# include <float.h>
+
 # define BUFFER_SIZE 100
+# define WIDTH 1240
+# define HEIGHT 680
+# define PI 3.14159265359
+# define BACK_GROUND 0x000000
+# define WHITE 0xFFFFFF
+
 
 enum e_type
 {
@@ -31,6 +39,26 @@ enum e_type
 	PL,
 	CL
 };
+
+typedef struct s_image
+{
+
+    void    *mlx_img;
+    char    *addr;
+    int     bits_per_pix;
+    int     line_len;
+    int     endian;
+}   t_image;
+
+typedef struct s_equation
+{
+	float	b;
+	float	c;
+	float	delta;
+	float	t1;
+	float	t2;
+	float	t;
+}	t_equation;
 
 typedef struct s_vector
 {
@@ -94,9 +122,14 @@ typedef struct s_vars
 {
 	void	*mlx;
 	void	*win;
-	int		width;
-	int		heigth;
+	t_image	image;
+	t_data	data;
+	int		move;
+
 }	t_vars;
+
+/*src/calcul/intersection*/
+float	inter_sphere(t_vector dir_pix, t_vector cam_o, t_Sphere sp, t_vector *rslt);
 
 /*src/window/loop_event*/
 int			handle_event(t_vars *vars);
@@ -164,5 +197,10 @@ void		eq_vector(t_vector *v1, t_vector v2);
 /*src/calcul/calcul3*/
 t_matrix	get_transfo_matrix(t_vector cam_orig, t_vector cam_dir);
 t_vector	vector_x_matrix(t_vector v, t_matrix m, int i);
+void		eq_matrix(t_matrix *m1, t_matrix m2);
 
+/*in progress*/
+void	set_img(t_image *img, t_vars	*data);
+int		img_pix_put(t_image *img, int x, int y, int color);
+void	algo(t_vars *vars);
 #endif
