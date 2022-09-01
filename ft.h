@@ -6,7 +6,7 @@
 /*   By: slahlou <slahlou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 17:30:42 by meudier           #+#    #+#             */
-/*   Updated: 2022/08/31 18:10:32 by slahlou          ###   ########.fr       */
+/*   Updated: 2022/09/01 17:56:39 by slahlou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,15 @@ enum e_type
 	SP,
 	PL,
 	CL
+};
+
+enum e_algo
+{
+	RAY_DIR,
+	HIT_POINT,
+	//N_HIT,
+	//LUM_DIR,
+	NB_VEC
 };
 
 typedef struct s_image
@@ -148,6 +157,8 @@ int			is_digit(char *str);
 int			is_float(char *str);
 int			ft_atoi(const char *nptr);
 float		ft_atof(char *str);
+float		max(float a, float b);
+float		min(float a, float b);
 
 /*GNL*/
 char		*get_next_line(int fd);
@@ -187,6 +198,7 @@ t_vector	float_x_vector(t_vector v1, float k);
 t_vector	add_vector(t_vector v1, t_vector v2);
 t_vector	cross_product(t_vector v1, t_vector v2);
 t_vector	sub_vector(t_vector v1, t_vector v2);
+t_vector	vector_x_vector(t_vector v1, t_vector v2);
 
 /*src/calcul/calcul2*/
 t_vector	normalize(t_vector v1);
@@ -199,8 +211,12 @@ t_matrix	get_transfo_matrix(t_vector cam_orig, t_vector cam_dir);
 t_vector	vector_x_matrix(t_vector v, t_matrix m, int i);
 void		eq_matrix(t_matrix *m1, t_matrix m2);
 
-/*in progress*/
-void	set_img(t_image *img, t_vars	*data);
-int		img_pix_put(t_image *img, int x, int y, int color);
-void	algo(t_vars *vars);
+/*RT algo*/
+void		set_img(t_image *img, t_vars	*data);
+int			img_pix_put(t_image *img, int x, int y, int color);
+void		algo(t_vars *vars);
+void		algo_shadow(t_vars *vars, t_vector hit_point, int i, int j);
+int			shift_color(t_vector color);
+void		rewind_list(t_Objects **obj);
+t_vector	loop_object_hit(t_Objects **obj, t_vector ray_dir, t_vector cam_pos, float *t_min);
 #endif

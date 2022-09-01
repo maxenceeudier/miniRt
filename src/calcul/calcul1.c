@@ -6,7 +6,7 @@
 /*   By: slahlou <slahlou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 17:25:34 by meudier           #+#    #+#             */
-/*   Updated: 2022/08/31 09:30:03 by slahlou          ###   ########.fr       */
+/*   Updated: 2022/09/01 12:29:51 by slahlou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,16 @@ t_vector	float_x_vector(t_vector v1, float k)
 	rslt.x = v1.x * k;
 	rslt.y = v1.y * k;
 	rslt.z = v1.z * k;
+	return (rslt);
+}
+
+t_vector	vector_x_vector(t_vector v1, t_vector v2)
+{
+	t_vector	rslt;
+
+	rslt.x = v1.x * v2.x;
+	rslt.y = v1.y * v2.y;
+	rslt.z = v1.z * v2.z;
 	return (rslt);
 }
 
