@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: meudier <meudier@student.42.fr>            +#+  +:+       +#+        */
+/*   By: slahlou <slahlou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:04:49 by meudier           #+#    #+#             */
-/*   Updated: 2022/08/30 18:37:58 by meudier          ###   ########.fr       */
+/*   Updated: 2022/09/02 18:52:49 by slahlou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ void	init_ft_parse(int (*parse_line['s' + 1])(t_data *, char**))
 	parse_line['C'] = &ft_parse_c;
 	parse_line['L'] = &ft_parse_l;
 	parse_line['s'] = &ft_parse_sp;
-	//parse_line['c'] = ft_parse_cl;
-	//parse_line['p'] = ft_parse_pl;
+	parse_line['c'] = ft_parse_cl;
+	parse_line['p'] = ft_parse_pl;
 }
 
 int	parse(char *line, t_data *data)

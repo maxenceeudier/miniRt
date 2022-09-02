@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: meudier <meudier@student.42.fr>            +#+  +:+       +#+        */
+/*   By: slahlou <slahlou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 14:33:54 by meudier           #+#    #+#             */
-/*   Updated: 2022/08/30 18:38:49 by meudier          ###   ########.fr       */
+/*   Updated: 2022/09/02 11:41:07 by slahlou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,16 @@ int	check_acl(t_data *data)
 		while (temp)
 		{
 			if (temp->id == SP)
-				if (!check_range_vector(&((t_Sphere *)temp->object)->color, \
-					0, 255))
+			{
+				if (!check_range_vector(&((t_Sphere *)temp->object)->color, 0, 255))
 					return (0);
-			/*else if (id == PL)
-				if (!check_range_vector(((t_Plan)temp->object).color, 0, 255))
-					return (0);
-			else if (id == CL)
+			}
+			else if (temp->id == PL)
+			{
+				if (!check_range_vector(&((t_plan *)temp->object)->color, 0, 255))
+				return (0);
+			}
+			/*else if (temp->id == CL)
 				if (!check_range_vector(((t_Cyldr)temp->object).color, 0, 255))
 					return (0);*/
 			temp = temp->next;

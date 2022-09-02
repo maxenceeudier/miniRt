@@ -6,7 +6,7 @@
 /*   By: slahlou <slahlou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 17:50:22 by slahlou           #+#    #+#             */
-/*   Updated: 2022/09/01 17:51:29 by slahlou          ###   ########.fr       */
+/*   Updated: 2022/09/02 19:32:56 by slahlou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_vector	get_luminosity(t_vars *vars, t_vector hit_point, t_vector n_hit, float 
 
 	eq_vector(&p_lum, sub_vector(vars->data.lum->pos, hit_point));
 	eq_vector(&lum_dir, normalize(p_lum));
-	if (transmission == FLT_MAX)
+	if (transmission == FLT_MAX || transmission > norme(p_lum))
 		transmission = 1;
 	else
 		transmission = 0.8;
@@ -41,14 +41,14 @@ t_vector	check_obstruction(t_vars *vars, t_vector hit_point, t_vector n_hit, t_O
 
 	current = objects;
 	eq_vector(&lum_dir, normalize(sub_vector(vars->data.lum->pos, hit_point)));
-	rewind_list(&(objects));
-	loop_object_hit(&(objects), lum_dir, add_vector(hit_point, float_x_vector(n_hit, 0.01)), &transmission);
+	rewind_list(&objects);
+	loop_object_hit(&objects, lum_dir, add_vector(hit_point, float_x_vector(n_hit, 0.01)), &transmission);
 	if (current->id == SP)
 		return (sub_vector(((t_Sphere *)current->object)->color, get_luminosity(vars, hit_point, n_hit, transmission)));
-	/*else if (current->id == PL)
+	else if (current->id == PL)
 		return (sub_vector(((t_plan *)current->object)->color, get_luminosity(vars, hit_point, n_hit, transmission)));
 	else if (current->id == CL)
-		return (sub_vector(((t_Sphere *)current->object)->color, get_luminosity(vars, hit_point, n_hit, transmission)));*/
+		return (sub_vector(((t_cylindre *)current->object)->color, get_luminosity(vars, hit_point, n_hit, transmission)));
 	else
 		return (((t_Sphere *)current->object)->color);
 
@@ -61,12 +61,19 @@ void	algo_shadow(t_vars *vars, t_vector hit_point, int i, int j)
 	if (vars->data.objects->id == SP)
 		eq_vector(&n_hit, normalize(sub_vector(hit_point, \
 		((t_Sphere *)vars->data.objects->object)->center)));
-	/*else if (vars->data.objects->id == PL)
-		eq_vector(&n_hit, normalize(sub_vector(hit_point, \
-	((t_plan *)vars->data.objects->object)->center)));
+	else if (vars->data.objects->id == PL)
+		eq_vector(&n_hit, normalize(((t_plan *)vars->data.objects->object)->normal_vec));
 	else if (vars->data.objects->id == CL)
-		eq_vector(&n_hit, normalize(sub_vector(hit_point, \
-	((t_cylindre *)vars->data.objects->object)->center)));*/
+	{
+		t_vector	dir_cl = normalize(((t_cylindre *)vars->data.objects->object)->dir);
+		t_vector	temp ;
+		t_vector	temp2;
+		temp.x = 0;
+		temp.y = 1;
+		temp.z = 0;
+		eq_vector(&temp2 , (cross_product(normalize(temp), dir_cl)));
+		eq_vector(&n_hit, cross_product(temp2, dir_cl));
+	}
 	img_pix_put(&vars->image, j, i, shift_color(check_obstruction\
 	(vars, hit_point, n_hit, vars->data.objects)));
 }

@@ -6,7 +6,7 @@
 /*   By: slahlou <slahlou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 17:30:42 by meudier           #+#    #+#             */
-/*   Updated: 2022/09/01 17:56:39 by slahlou          ###   ########.fr       */
+/*   Updated: 2022/09/02 18:50:01 by slahlou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ enum e_type
 {
 	SP,
 	PL,
-	CL
+	CL,
+	OBJ_SIZE
 };
 
 enum e_algo
@@ -48,6 +49,7 @@ enum e_algo
 	//LUM_DIR,
 	NB_VEC
 };
+
 
 typedef struct s_image
 {
@@ -61,6 +63,7 @@ typedef struct s_image
 
 typedef struct s_equation
 {
+	float	a;
 	float	b;
 	float	c;
 	float	delta;
@@ -103,6 +106,22 @@ typedef struct s_Sphere
 	float		radius;
 }	t_Sphere;
 
+typedef struct s_plan
+{
+	t_vector	origin;
+	t_vector	normal_vec;
+	t_vector	color;
+}	t_plan;
+
+typedef struct s_cylindre
+{
+	t_vector	base;
+	t_vector	dir;
+	float		heigth;
+	float		radius;
+	t_vector	color;
+}	t_cylindre;
+
 typedef struct s_Objects
 {
 	int					id;
@@ -136,9 +155,6 @@ typedef struct s_vars
 	int		move;
 
 }	t_vars;
-
-/*src/calcul/intersection*/
-float	inter_sphere(t_vector dir_pix, t_vector cam_o, t_Sphere sp, t_vector *rslt);
 
 /*src/window/loop_event*/
 int			handle_event(t_vars *vars);
@@ -210,6 +226,11 @@ void		eq_vector(t_vector *v1, t_vector v2);
 t_matrix	get_transfo_matrix(t_vector cam_orig, t_vector cam_dir);
 t_vector	vector_x_matrix(t_vector v, t_matrix m, int i);
 void		eq_matrix(t_matrix *m1, t_matrix m2);
+
+/*src/calcul/intersection*/
+float		inter_sphere(t_vector dir_pix, t_vector cam_o, void *sp, t_vector *rslt);
+float		inter_plan(t_vector dir_pix, t_vector cam_o, void *plan, t_vector *rslt);
+float		inter_cylindre(t_vector dir_pix, t_vector cam_o, void *cylindre, t_vector *rslt);
 
 /*RT algo*/
 void		set_img(t_image *img, t_vars	*data);
