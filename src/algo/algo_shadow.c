@@ -6,7 +6,7 @@
 /*   By: slahlou <slahlou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 17:50:22 by slahlou           #+#    #+#             */
-/*   Updated: 2022/09/02 19:32:56 by slahlou          ###   ########.fr       */
+/*   Updated: 2022/09/05 16:22:54 by slahlou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	algo_shadow(t_vars *vars, t_vector hit_point, int i, int j)
 		temp.y = 1;
 		temp.z = 0;
 		eq_vector(&temp2 , (cross_product(normalize(temp), dir_cl)));
-		eq_vector(&n_hit, cross_product(temp2, dir_cl));
+		eq_vector(&n_hit, cross_product(dir_cl, temp2));
 	}
 	img_pix_put(&vars->image, j, i, shift_color(check_obstruction\
 	(vars, hit_point, n_hit, vars->data.objects)));
