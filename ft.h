@@ -6,7 +6,7 @@
 /*   By: slahlou <slahlou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 17:30:42 by meudier           #+#    #+#             */
-/*   Updated: 2022/09/02 18:50:01 by slahlou          ###   ########.fr       */
+/*   Updated: 2022/09/07 18:21:06 by slahlou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,7 @@ int			destroy(t_vars *vars);
 
 /*src/tools/split*/
 char		**ft_split(char const *s, char c);
+char	**ft_split_charset(char *str, char *charset);
 
 /*src/toolstools*/
 int			ft_strcmp(const char *s1, const char *s2);

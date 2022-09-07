@@ -6,7 +6,7 @@
 /*   By: slahlou <slahlou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 17:50:22 by slahlou           #+#    #+#             */
-/*   Updated: 2022/09/05 16:22:54 by slahlou          ###   ########.fr       */
+/*   Updated: 2022/09/07 16:43:48 by slahlou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,22 @@ void	algo_shadow(t_vars *vars, t_vector hit_point, int i, int j)
 		eq_vector(&n_hit, normalize(((t_plan *)vars->data.objects->object)->normal_vec));
 	else if (vars->data.objects->id == CL)
 	{
-		t_vector	dir_cl = normalize(((t_cylindre *)vars->data.objects->object)->dir);
-		t_vector	temp ;
-		t_vector	temp2;
-		temp.x = 0;
-		temp.y = 1;
-		temp.z = 0;
-		eq_vector(&temp2 , (cross_product(normalize(temp), dir_cl)));
-		eq_vector(&n_hit, cross_product(dir_cl, temp2));
+		t_cylindre	*cl;
+		t_vector	b_phit;
+		float	hyp;
+		float	h;
+
+		cl = (t_cylindre *)vars->data.objects->object;
+		eq_vector(&b_phit, sub_vector(hit_point, cl->base));
+		eq_vector(&cl->dir, normalize(cl->dir));
+		hyp = norme(b_phit);
+		h = sqrtf((hyp * hyp) - (cl->radius * cl->radius));
+		if (h <= cl->heigth && scalaire_product(sub_vector(hit_point, cl->base), cl->dir) >= 0)
+			eq_vector(&n_hit, normalize(sub_vector(hit_point, add_vector(cl->base, float_x_vector(cl->dir, h)))));
+		else if (hyp <= cl->radius)
+			eq_vector(&n_hit, float_x_vector(cl->dir, -1));
+		else
+			eq_vector(&n_hit, cl->dir);
 	}
 	img_pix_put(&vars->image, j, i, shift_color(check_obstruction\
 	(vars, hit_point, n_hit, vars->data.objects)));

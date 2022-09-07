@@ -6,7 +6,7 @@
 /*   By: slahlou <slahlou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:04:49 by meudier           #+#    #+#             */
-/*   Updated: 2022/09/02 18:52:49 by slahlou          ###   ########.fr       */
+/*   Updated: 2022/09/07 18:24:22 by slahlou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	parse(char *line, t_data *data)
 	int		(*parse_line['s' + 1])(t_data *, char **);
 
 	init_ft_parse(parse_line);
-	line_split = ft_split(line, ' ');
+	line_split = ft_split_charset(line, " \t");
 	if (check_id(*line_split))
 	{
 		if (!(*parse_line[(int)*line])(data, line_split))
