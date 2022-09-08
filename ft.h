@@ -6,7 +6,7 @@
 /*   By: slahlou <slahlou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 17:30:42 by meudier           #+#    #+#             */
-/*   Updated: 2022/09/08 13:40:48 by slahlou          ###   ########.fr       */
+/*   Updated: 2022/09/08 18:10:25 by slahlou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 
 # define BUFFER_SIZE 100
 # define WIDTH 2000
-# define HEIGHT 972
+# define HEIGHT 1080
 # define WIDTH_W 200
 # define HEIGHT_W 400
 
@@ -155,11 +155,11 @@ typedef struct s_vars
 {
 	void	*mlx;
 	void	*win;
-	t_image	image[2];
+	t_image	image;
 	t_data	data;
 	int		move;
-	int		info;
-
+	char	**av;
+	int		ac;
 }	t_vars;
 
 /*src/window/loop_event*/
@@ -184,6 +184,10 @@ float		max(float a, float b);
 float		min(float a, float b);
 int			into_radius(t_vector *rslt, t_vector base, float radius);
 void		init_plan(t_plan *plan, t_cylindre *cl, float normal_dir);
+int			ft_strlen(char *str);
+char		*ft_itoa(int n);
+char		*ftoa(float f);
+char		*ft_strjoin(char *s1, char *s2);
 
 /*GNL*/
 char		*get_next_line(int fd);

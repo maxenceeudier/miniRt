@@ -6,7 +6,7 @@
 /*   By: slahlou <slahlou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 10:54:32 by slahlou           #+#    #+#             */
-/*   Updated: 2022/09/08 13:33:02 by slahlou          ###   ########.fr       */
+/*   Updated: 2022/09/08 15:57:40 by slahlou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,9 +132,12 @@ void *cylindre, t_vector *rslt)
 
 	cl = (t_cylindre *)cylindre;
 	t = inter_ext_cl(dir_pix, cam_o, cl, rslt);
-	hyp = norme(sub_vector(*rslt, cl->base));
-	h = sqrtf((hyp * hyp) - (cl->radius * cl->radius));
-	if (h < cl->heigth && scalaire_product(sub_vector(*rslt, cl->base), \
+	if (t)
+	{
+		hyp = norme(sub_vector(*rslt, cl->base));
+		h = sqrtf((hyp * hyp) - (cl->radius * cl->radius));
+	}
+	if (t && h < cl->heigth && scalaire_product(sub_vector(*rslt, cl->base), \
 	cl->dir) > 0)
 	{
 		cl->inter_code = 1;

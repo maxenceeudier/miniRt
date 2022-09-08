@@ -6,11 +6,21 @@
 /*   By: slahlou <slahlou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 17:54:00 by slahlou           #+#    #+#             */
-/*   Updated: 2022/09/08 10:45:04 by slahlou          ###   ########.fr       */
+/*   Updated: 2022/09/08 15:16:40 by slahlou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../ft.h"
+
+int	ft_strlen(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
 
 float	max(float a, float b)
 {

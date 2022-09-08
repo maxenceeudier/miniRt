@@ -6,7 +6,7 @@
 /*   By: slahlou <slahlou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 17:50:22 by slahlou           #+#    #+#             */
-/*   Updated: 2022/09/08 13:39:55 by slahlou          ###   ########.fr       */
+/*   Updated: 2022/09/08 17:53:11 by slahlou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,6 @@ void	algo_shadow(t_vars *vars, t_vector hit_point, int i, int j)
 	else if (vars->data.objects->id == CL)
 		eq_vector(&n_hit, \
 		get_nhit_cl((t_cylindre *)vars->data.objects->object, hit_point));
-	img_pix_put(&vars->image[0], j, i, shift_color(check_obstruction(vars, \
+	img_pix_put(&vars->image, j, i, shift_color(check_obstruction(vars, \
 	hit_point, n_hit, vars->data.objects)));
 }
