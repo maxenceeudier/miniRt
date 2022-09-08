@@ -6,16 +6,16 @@
 /*   By: slahlou <slahlou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 14:21:17 by meudier           #+#    #+#             */
-/*   Updated: 2022/08/31 16:35:50 by slahlou          ###   ########.fr       */
+/*   Updated: 2022/09/08 13:41:50 by slahlou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft.h"
 
 
-void set_img(t_image *image, t_vars *data)
+void set_img(t_image *image, t_vars *data, int w, int h)
 {
-        image->mlx_img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
+        image->mlx_img = mlx_new_image(data->mlx, w, h);
         image->addr = mlx_get_data_addr(image->mlx_img, \
         &(image->bits_per_pix), &(image->line_len), &(image->endian));
 }
@@ -43,6 +43,7 @@ int	main(int ac, char **av)
 	t_vars	vars;
 
 	vars.move = 1;
+	vars.info = 0;
 	if (!init_data(ac, av, &vars.data))
 		return (printf("--> ERROR INPUT\n"));
 	vars.mlx = mlx_init();
@@ -51,7 +52,8 @@ int	main(int ac, char **av)
 	vars.win = mlx_new_window(vars.mlx, WIDTH, HEIGHT, "miniRt !!");
 	if (!vars.win)
 		return (1);
-	set_img(&vars.image, &vars);
+	set_img(&vars.image[0], &vars, WIDTH - 200 , HEIGHT);
+	set_img(&vars.image[1], &vars, WIDTH_W, HEIGHT_W);
 	mlx_key_hook(vars.win, key_event, &vars);
 	mlx_loop_hook(vars.mlx, &handle_event, &vars);
 	mlx_hook(vars.win, 17, 1L >> 17, loop_end, &vars);

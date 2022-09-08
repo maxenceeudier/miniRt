@@ -6,7 +6,7 @@
 /*   By: slahlou <slahlou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 17:30:42 by meudier           #+#    #+#             */
-/*   Updated: 2022/09/07 18:21:06 by slahlou          ###   ########.fr       */
+/*   Updated: 2022/09/08 13:40:48 by slahlou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,12 @@
 # include <float.h>
 
 # define BUFFER_SIZE 100
-# define WIDTH 1240
-# define HEIGHT 680
+# define WIDTH 2000
+# define HEIGHT 972
+# define WIDTH_W 200
+# define HEIGHT_W 400
+
+
 # define PI 3.14159265359
 # define BACK_GROUND 0x000000
 # define WHITE 0xFFFFFF
@@ -120,6 +124,7 @@ typedef struct s_cylindre
 	float		heigth;
 	float		radius;
 	t_vector	color;
+	int			inter_code;
 }	t_cylindre;
 
 typedef struct s_Objects
@@ -150,9 +155,10 @@ typedef struct s_vars
 {
 	void	*mlx;
 	void	*win;
-	t_image	image;
+	t_image	image[2];
 	t_data	data;
 	int		move;
+	int		info;
 
 }	t_vars;
 
@@ -176,6 +182,8 @@ int			ft_atoi(const char *nptr);
 float		ft_atof(char *str);
 float		max(float a, float b);
 float		min(float a, float b);
+int			into_radius(t_vector *rslt, t_vector base, float radius);
+void		init_plan(t_plan *plan, t_cylindre *cl, float normal_dir);
 
 /*GNL*/
 char		*get_next_line(int fd);
@@ -234,7 +242,7 @@ float		inter_plan(t_vector dir_pix, t_vector cam_o, void *plan, t_vector *rslt);
 float		inter_cylindre(t_vector dir_pix, t_vector cam_o, void *cylindre, t_vector *rslt);
 
 /*RT algo*/
-void		set_img(t_image *img, t_vars	*data);
+void set_img(t_image *image, t_vars *data, int w, int h);
 int			img_pix_put(t_image *img, int x, int y, int color);
 void		algo(t_vars *vars);
 void		algo_shadow(t_vars *vars, t_vector hit_point, int i, int j);

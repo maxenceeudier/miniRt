@@ -6,7 +6,7 @@
 /*   By: slahlou <slahlou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 14:53:31 by slahlou           #+#    #+#             */
-/*   Updated: 2022/09/02 18:58:45 by slahlou          ###   ########.fr       */
+/*   Updated: 2022/09/08 12:08:52 by slahlou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void	algo(t_vars *vars)
 			eq_vector(&v[RAY_DIR], vector_x_matrix(v[RAY_DIR], matrix, 0));
 			eq_vector(&v[HIT_POINT], loop_object_hit(&vars->data.objects, v[RAY_DIR], vars->data.cam->pos, &t_min));
 			if (t_min == FLT_MAX)
-				img_pix_put(&vars->image, j, i, BACK_GROUND);
+				img_pix_put(&vars->image[0], j, i, BACK_GROUND);
 			else
 				algo_shadow(vars, v[HIT_POINT], i, j);
 			rewind_list(&(vars->data.objects));
