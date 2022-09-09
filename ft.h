@@ -6,7 +6,7 @@
 /*   By: slahlou <slahlou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 17:30:42 by meudier           #+#    #+#             */
-/*   Updated: 2022/09/09 14:27:34 by slahlou          ###   ########.fr       */
+/*   Updated: 2022/09/09 15:43:21 by slahlou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,7 @@ int			ft_strlen(char *str);
 char		*ft_itoa(int n);
 char		*ftoa(float f);
 char		*ft_strjoin(char *s1, char *s2);
+void		rewind_list(t_Objects **obj);
 
 /*GNL*/
 char		*get_next_line(int fd);

@@ -6,7 +6,7 @@
 /*   By: slahlou <slahlou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 14:53:31 by slahlou           #+#    #+#             */
-/*   Updated: 2022/09/08 17:52:53 by slahlou          ###   ########.fr       */
+/*   Updated: 2022/09/09 15:39:55 by slahlou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	shift_color(t_vector color)
 {
-	int res;
+	int	res;
 
 	res = 0;
 	res |= ((int)min(255, max(0, color.x))) << 16;
@@ -23,20 +23,8 @@ int	shift_color(t_vector color)
 	return (res);
 }
 
-void	rewind_list(t_Objects **obj)
-{
-	t_Objects	*tmp;
-
-	tmp = *obj;
-	if (tmp)
-	{
-		while (tmp->prev)
-			tmp = tmp->prev;
-		(*obj) = tmp;
-	}
-}
-
-float	get_intersection(t_Objects *temp, t_vector raydir, t_vector cam_pos, t_vector *phit)
+float	get_intersection(t_Objects *temp, t_vector raydir, \
+t_vector cam_pos, t_vector *phit)
 {
 	if (temp->id == SP)
 	{
@@ -53,17 +41,16 @@ float	get_intersection(t_Objects *temp, t_vector raydir, t_vector cam_pos, t_vec
 	return (0);
 }
 
-t_vector loop_object_hit(t_Objects **objects, t_vector ray_dir, t_vector cam_pos, float *t_min)
+t_vector	loop_object_hit(t_Objects **objects, \
+t_vector ray_dir, t_vector cam_pos, float *t_min)
 {
 	t_Objects	*temp;
 	t_vector	p_hit;
 	t_vector	p_hit_temp;
 	float		t;
 
-
 	temp = *objects;
 	*t_min = FLT_MAX;
-
 	while (temp)
 	{
 		t = get_intersection(temp, ray_dir, cam_pos, &p_hit_temp);
@@ -75,12 +62,12 @@ t_vector loop_object_hit(t_Objects **objects, t_vector ray_dir, t_vector cam_pos
 		}
 		temp = temp->next;
 	}
-	return(p_hit);
+	return (p_hit);
 }
 
-t_vector	init_pix_pos(int j, int i, float fov)
+t_vector	pix_pos(int j, int i, float fov)
 {
-	t_vector pixel;
+	t_vector	pixel;
 
 	pixel.x = j - WIDTH / 2;
 	pixel.y = i - HEIGHT / 2;
@@ -92,20 +79,22 @@ void	algo(t_vars *vars)
 {
 	t_matrix	matrix;
 	t_vector	v[NB_VEC];
-	int 		i;
+	int			i;
 	int			j;
 	float		t_min;
 
 	i = -1;
-	eq_matrix(&matrix, get_transfo_matrix(vars->data.cam->pos, vars->data.cam->dir));
+	eq_matrix(&matrix, \
+	get_transfo_matrix(vars->data.cam->pos, vars->data.cam->dir));
 	while (++i < HEIGHT)
 	{
 		j = -1;
 		while (++j < WIDTH)
 		{
-			eq_vector(&v[RAY_DIR], init_pix_pos(j, i, (float)vars->data.cam->fov));
+			eq_vector(&v[RAY_DIR], pix_pos(j, i, (float)vars->data.cam->fov));
 			eq_vector(&v[RAY_DIR], vector_x_matrix(v[RAY_DIR], matrix, 0));
-			eq_vector(&v[HIT_POINT], loop_object_hit(&vars->data.objects, v[RAY_DIR], vars->data.cam->pos, &t_min));
+			eq_vector(&v[HIT_POINT], loop_object_hit(&vars->data.objects, \
+			v[RAY_DIR], vars->data.cam->pos, &t_min));
 			if (t_min == FLT_MAX)
 				img_pix_put(&vars->image, j, i, BACK_GROUND);
 			else

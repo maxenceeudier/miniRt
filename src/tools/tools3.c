@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: meudier <meudier@student.42.fr>            +#+  +:+       +#+        */
+/*   By: slahlou <slahlou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 15:24:34 by slahlou           #+#    #+#             */
-/*   Updated: 2022/09/09 13:52:01 by meudier          ###   ########.fr       */
+/*   Updated: 2022/09/09 15:36:35 by slahlou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,4 +108,17 @@ char	*ftoa(float f)
 	str[i] = 0;
 	free(temp);
 	return (str);
+}
+
+void	rewind_list(t_Objects **obj)
+{
+	t_Objects	*tmp;
+
+	tmp = *obj;
+	if (tmp)
+	{
+		while (tmp->prev)
+			tmp = tmp->prev;
+		(*obj) = tmp;
+	}
 }
