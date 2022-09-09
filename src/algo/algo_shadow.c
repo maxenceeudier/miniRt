@@ -6,7 +6,7 @@
 /*   By: slahlou <slahlou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 17:50:22 by slahlou           #+#    #+#             */
-/*   Updated: 2022/09/09 12:58:41 by slahlou          ###   ########.fr       */
+/*   Updated: 2022/09/09 14:23:12 by slahlou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,12 @@ t_vector n_hit, float transmission)
 	ld = transmission * (vars->data.lum->ratio * (1000000.0 / \
 	scalaire_product(p_lum, p_lum))) * max(0, scalaire_product(n_hit, lum_dir));
 	la = (100.0 * vars->data.luma->ratio);
-	luminosity.x = 255 - (vars->data.lum->color.x * (ld / 255)) - (vars->data.luma->color.x * (la / 255));
-	luminosity.y = 255 - (vars->data.lum->color.y * (ld / 255)) - (vars->data.luma->color.y * (la / 255));
-	luminosity.z = 255 - (vars->data.lum->color.z * (ld / 255)) - (vars->data.luma->color.z * (la / 255));
+	luminosity.x = 255 - (vars->data.lum->color.x * (ld / 255)) - \
+	(vars->data.luma->color.x * (la / 255));
+	luminosity.y = 255 - (vars->data.lum->color.y * (ld / 255)) - \
+	(vars->data.luma->color.y * (la / 255));
+	luminosity.z = 255 - (vars->data.lum->color.z * (ld / 255)) - \
+	(vars->data.luma->color.z * (la / 255));
 	return (luminosity);
 }
 
@@ -87,26 +90,17 @@ void	algo_shadow(t_vars *vars, t_vector hit_point, int i, int j)
 	t_vector	n_hit;
 
 	if (vars->data.objects->id == SP)
-	{
-		eq_vector(&n_hit, normalize(sub_vector(hit_point, \
-		((t_Sphere *)vars->data.objects->object)->center)));
-		if (norme(sub_vector(vars->data.cam->pos, ((t_Sphere *)vars->data.objects->object)->center)) < ((t_Sphere *)vars->data.objects->object)->radius)
-			eq_vector(&n_hit, float_x_vector(n_hit, -1));
-	}
+		eq_vector(&n_hit, \
+		compute_nhit_sp(((t_Sphere *)vars->data.objects->object), \
+		hit_point, vars->data.cam->pos));
 	else if (vars->data.objects->id == PL)
-	{
 		eq_vector(&n_hit, \
-		normalize(((t_plan *)vars->data.objects->object)->normal_vec));
-		if (scalaire_product(normalize(sub_vector(hit_point, vars->data.cam->pos)), n_hit) > 0)
-			eq_vector(&n_hit, float_x_vector(n_hit, -1));
-	}
+		compute_nhit_pl(((t_plan *)vars->data.objects->object), \
+		hit_point, vars->data.cam->pos));
 	else if (vars->data.objects->id == CL)
-	{
 		eq_vector(&n_hit, \
-		get_nhit_cl((t_cylindre *)vars->data.objects->object, hit_point));
-		if (scalaire_product(normalize(sub_vector(hit_point, vars->data.cam->pos)), n_hit) > 0)
-			eq_vector(&n_hit, float_x_vector(n_hit, -1));
-	}
+		compute_nhit_cy((t_cylindre *)vars->data.objects->object, \
+		hit_point, vars->data.cam->pos));
 	img_pix_put(&vars->image, j, i, shift_color(check_obstruction(vars, \
 	hit_point, n_hit, vars->data.objects)));
 }

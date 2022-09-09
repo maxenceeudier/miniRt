@@ -6,7 +6,7 @@
 /*   By: slahlou <slahlou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 17:30:42 by meudier           #+#    #+#             */
-/*   Updated: 2022/09/09 09:50:13 by slahlou          ###   ########.fr       */
+/*   Updated: 2022/09/09 14:20:34 by slahlou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,6 +224,9 @@ t_vector	add_vector(t_vector v1, t_vector v2);
 t_vector	cross_product(t_vector v1, t_vector v2);
 t_vector	sub_vector(t_vector v1, t_vector v2);
 t_vector	vector_x_vector(t_vector v1, t_vector v2);
+t_vector	compute_nhit_sp(t_Sphere *sp, t_vector hit_point, t_vector cam_pos);
+t_vector	compute_nhit_cy(t_cylindre *cy, t_vector hit_point, t_vector cam_pos);
+t_vector	compute_nhit_pl(t_plan *pl, t_vector hit_point, t_vector cam_pos);
 
 /*src/calcul/calcul2*/
 t_vector	normalize(t_vector v1);
@@ -240,6 +243,7 @@ void		eq_matrix(t_matrix *m1, t_matrix m2);
 float		inter_sphere(t_vector dir_pix, t_vector cam_o, void *sp, t_vector *rslt);
 float		inter_plan(t_vector dir_pix, t_vector cam_o, void *plan, t_vector *rslt);
 float		inter_cylindre(t_vector dir_pix, t_vector cam_o, void *cylindre, t_vector *rslt);
+t_vector	get_nhit_cl(t_cylindre *cl, t_vector hit_point);
 
 /*RT algo*/
 void set_img(t_image *image, t_vars *data, int w, int h);

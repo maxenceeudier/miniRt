@@ -6,7 +6,7 @@
 #    By: slahlou <slahlou@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/18 15:52:00 by meudier           #+#    #+#              #
-#    Updated: 2022/09/08 15:51:22 by slahlou          ###   ########.fr        #
+#    Updated: 2022/09/09 14:18:32 by slahlou          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRC = src/main.c \
 	src/parser/check.c src/parser/init_data.c src/parser/free_data.c \
 	src/parser/parser.c src/parser/parser_obj.c \
 	src/calcul/calcul1.c src/calcul/calcul2.c src/calcul/calcul3.c src/calcul/intersection.c \
+	src/calcul/compute_nhit.c\
 	src/algo/algo.c src/algo/algo_shadow.c
 
 
