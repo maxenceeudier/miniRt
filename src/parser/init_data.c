@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slahlou <slahlou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: meudier <meudier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 12:12:15 by meudier           #+#    #+#             */
-/*   Updated: 2022/09/08 14:47:19 by slahlou          ###   ########.fr       */
+/*   Updated: 2022/09/09 13:31:21 by meudier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	initialize_data(t_data *data)
 	data->objects = NULL;
 }
 
-int	init_data(int ac, char **av, t_data *data)
+int	init_data2(char *av, t_data *data)
 {
 	int		fd;
 	int		ret;
@@ -53,29 +53,29 @@ int	init_data(int ac, char **av, t_data *data)
 
 	line = "start";
 	ret = 1;
-	if (ac == 2 && is_good_extension(av[1]))
+	initialize_data(data);
+	fd = open(av, O_RDONLY);
+	if (fd < 0)
+		return (0);
+	while (line && ret)
 	{
-		initialize_data(data);
-		fd = open(av[1], O_RDONLY);
-		if (fd < 0)
-			return (0);
-		while (line && ret)
+		line = get_next_line(fd);
+		if (line)
 		{
-			line = get_next_line(fd);
-			if (line)
-			{
-				if (line[0] != '\n' && line[0])
-					ret = parse(line, data);
-				free(line);
-			}
+			if (line[0] != '\n' && line[0])
+				ret = parse(line, data);
+			free(line);
 		}
-		if (!ret || !check_acl(data))
-		{
-			free_data(data);
-			ret = 0;
-		}
-		close(fd);
-		return (ret);
 	}
+	if (!ret || !check_acl(data))
+		ret = free_data(data);
+	close(fd);
+	return (ret);
+}
+
+int	init_data(int ac, char **av, t_data *data)
+{
+	if (ac == 2 && is_good_extension(av[1]))
+		return (init_data2(av[1], data));
 	return (0);
 }

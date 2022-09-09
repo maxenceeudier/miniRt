@@ -3,21 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slahlou <slahlou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: meudier <meudier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 14:21:17 by meudier           #+#    #+#             */
-/*   Updated: 2022/09/09 11:15:27 by slahlou          ###   ########.fr       */
+/*   Updated: 2022/09/09 13:11:19 by meudier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft.h"
 
-
-void set_img(t_image *image, t_vars *data, int w, int h)
+void	set_img(t_image *image, t_vars *data, int w, int h)
 {
-        image->mlx_img = mlx_new_image(data->mlx, w, h);
-        image->addr = mlx_get_data_addr(image->mlx_img, \
-        &(image->bits_per_pix), &(image->line_len), &(image->endian));
+	image->mlx_img = mlx_new_image(data->mlx, w, h);
+	image->addr = mlx_get_data_addr(image->mlx_img, \
+	&(image->bits_per_pix), &(image->line_len), &(image->endian));
 }
 
 int	img_pix_put(t_image *img, int x, int y, int color)

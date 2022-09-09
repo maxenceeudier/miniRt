@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   intersection.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slahlou <slahlou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: meudier <meudier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 10:54:32 by slahlou           #+#    #+#             */
-/*   Updated: 2022/09/09 11:42:39 by slahlou          ###   ########.fr       */
+/*   Updated: 2022/09/09 13:50:40 by meudier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../ft.h"
 
-
-float	inter_sphere(t_vector dir_pix, t_vector cam_o, void *sphere, t_vector *rslt)
+float	inter_sphere(t_vector dir_pix, t_vector cam_o, void *sphere, \
+t_vector *rslt)
 {
 	t_vector	oc;
 	t_equation	inter;

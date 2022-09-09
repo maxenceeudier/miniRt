@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_obj.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slahlou <slahlou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: meudier <meudier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:01:59 by meudier           #+#    #+#             */
-/*   Updated: 2022/09/02 18:58:02 by slahlou          ###   ########.fr       */
+/*   Updated: 2022/09/09 13:47:37 by meudier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,15 @@ int	ft_parse_sp(t_data *data, char **line_split)
 	if (res)
 		temp->radius = (ft_atof(line_split[2])) / 2;
 	if (!res || !__add_node(&data->objects, (void *)temp, SP))
-	{
-		free(temp);
-		return (0);
-	}
+		return (free_void(temp));
 	return (1);
+}
+
+void	increment_j(char **line_split, int *j)
+{
+	*j = 0;
+	while (line_split[*j])
+		(*j)++;
 }
 
 int	ft_parse_cl(t_data *data, char **line_split)
@@ -53,9 +57,7 @@ int	ft_parse_cl(t_data *data, char **line_split)
 	res = 1;
 	if (!temp)
 		res = 0;
-	j = 0;
-	while (line_split[j])
-		j++;
+	increment_j(line_split, &j);
 	if (j != 6)
 		res = 0;
 	if (res && !a_to_vec(line_split[1], &temp->base, &is_float))
@@ -69,18 +71,15 @@ int	ft_parse_cl(t_data *data, char **line_split)
 	if (res)
 		temp->heigth = (ft_atof(line_split[4]));
 	if (!res || !__add_node(&data->objects, (void *)temp, CL))
-	{
-		free(temp);
-		return (0);
-	}
+		return (free_void(temp));
 	return (1);
 }
 
 int	ft_parse_pl(t_data *data, char **line_split)
 {
 	t_plan	*temp;
-	int			j;
-	int			res;
+	int		j;
+	int		res;
 
 	temp = malloc(sizeof(t_plan));
 	res = 1;
@@ -98,10 +97,7 @@ int	ft_parse_pl(t_data *data, char **line_split)
 	if (res && !a_to_vec(line_split[3], &temp->color, &is_digit))
 		res = 0;
 	if (!res || !__add_node(&data->objects, (void *)temp, PL))
-	{
-		free(temp);
-		return (0);
-	}
+		return (free_void(temp));
 	return (1);
 }
 

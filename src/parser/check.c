@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slahlou <slahlou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: meudier <meudier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 14:33:54 by meudier           #+#    #+#             */
-/*   Updated: 2022/09/02 11:41:07 by slahlou          ###   ########.fr       */
+/*   Updated: 2022/09/09 13:21:45 by meudier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,31 @@ int	check_range_vector(t_vector *vector, int min, int max)
 	return (1);
 }
 
+int	check_range_object(t_Objects *temp)
+{
+	while (temp)
+	{
+		if (temp->id == SP)
+		{
+			if (!check_range_vector(&((t_Sphere *)temp->object)->color, 0, 255))
+				return (0);
+		}
+		else if (temp->id == PL)
+		{
+			if (!check_range_vector(&((t_plan *)temp->object)->color, 0, 255))
+				return (0);
+		}
+		else if (temp->id == CL)
+			if (!check_range_vector(&((t_cylindre *)temp->object)->color, \
+			0, 255))
+				return (0);
+		temp = temp->next;
+	}
+	return (1);
+}
+
 int	check_acl(t_data *data)
 {
-	t_Objects	*temp;
-
 	if (!data->luma || !data->lum || !data->cam || !data->objects)
 		return (0);
 	if ((data->luma->ratio < 0 || data->luma->ratio > 1)
@@ -60,25 +81,7 @@ int	check_acl(t_data *data)
 		|| !check_range_vector(&data->cam->dir, -1, 1))
 		return (0);
 	if (data->objects)
-	{
-		temp = data->objects;
-		while (temp)
-		{
-			if (temp->id == SP)
-			{
-				if (!check_range_vector(&((t_Sphere *)temp->object)->color, 0, 255))
-					return (0);
-			}
-			else if (temp->id == PL)
-			{
-				if (!check_range_vector(&((t_plan *)temp->object)->color, 0, 255))
-				return (0);
-			}
-			/*else if (temp->id == CL)
-				if (!check_range_vector(((t_Cyldr)temp->object).color, 0, 255))
-					return (0);*/
-			temp = temp->next;
-		}
-	}
+		if (!check_range_object(data->objects))
+			return (0);
 	return (1);
 }
