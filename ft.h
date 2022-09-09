@@ -6,7 +6,7 @@
 /*   By: slahlou <slahlou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 17:30:42 by meudier           #+#    #+#             */
-/*   Updated: 2022/09/08 18:10:25 by slahlou          ###   ########.fr       */
+/*   Updated: 2022/09/09 09:50:13 by slahlou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,8 @@
 # include <float.h>
 
 # define BUFFER_SIZE 100
-# define WIDTH 2000
-# define HEIGHT 1080
-# define WIDTH_W 200
-# define HEIGHT_W 400
+# define WIDTH 1280
+# define HEIGHT 690
 
 
 # define PI 3.14159265359
@@ -49,8 +47,6 @@ enum e_algo
 {
 	RAY_DIR,
 	HIT_POINT,
-	//N_HIT,
-	//LUM_DIR,
 	NB_VEC
 };
 

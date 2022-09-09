@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: meudier <meudier@student.42.fr>            +#+  +:+       +#+        */
+/*   By: slahlou <slahlou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 10:58:56 by meudier           #+#    #+#             */
-/*   Updated: 2022/08/30 18:22:54 by meudier          ###   ########.fr       */
+/*   Updated: 2022/09/09 10:17:05 by slahlou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ float	ft_atof(char *str)
 	if (*str == '.')
 		str++;
 	res2 = (float) ft_atoi(str);
-	while (res2 > 1)
+	while (res2 >= 1)
 		res2 /= 10;
 	return ((res + res2) * sign);
 }

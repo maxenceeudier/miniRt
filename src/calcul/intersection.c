@@ -6,7 +6,7 @@
 /*   By: slahlou <slahlou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 10:54:32 by slahlou           #+#    #+#             */
-/*   Updated: 2022/09/08 15:57:40 by slahlou          ###   ########.fr       */
+/*   Updated: 2022/09/09 11:42:39 by slahlou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,14 +105,14 @@ t_vector dir_pix, t_vector cam_o, t_vector *rslt)
 	init_plan(&end, cl, 1);
 	var.t1 = inter_plan(dir_pix, cam_o, &base, &base_rslt);
 	var.t2 = inter_plan(dir_pix, cam_o, &end, &end_rslt);
-	if (var.t1 && var.t1 < var.t2 && var.t1 != \
+	if (var.t1 && (!var.t2 || var.t1 < var.t2) && var.t1 != \
 	FLT_MAX && into_radius(&base_rslt, base.origin, cl->radius))
 	{
 		eq_vector(rslt, base_rslt);
 		cl->inter_code = 2;
 		return (var.t1);
 	}
-	if (var.t2 && var.t2 < var.t1 && var.t2 != \
+	if (var.t2 && (!var.t1 || var.t2 < var.t1) && var.t2 != \
 	FLT_MAX && into_radius(&end_rslt, end.origin, cl->radius))
 	{
 		eq_vector(rslt, end_rslt);

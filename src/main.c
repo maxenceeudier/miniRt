@@ -6,7 +6,7 @@
 /*   By: slahlou <slahlou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 14:21:17 by meudier           #+#    #+#             */
-/*   Updated: 2022/09/08 18:14:12 by slahlou          ###   ########.fr       */
+/*   Updated: 2022/09/09 11:15:27 by slahlou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ int	main(int ac, char **av)
 	if (!vars.win)
 		return (1);
 	set_img(&vars.image, &vars, WIDTH, HEIGHT);
-	mlx_key_hook(vars.win, key_event, &vars);
 	mlx_loop_hook(vars.mlx, &handle_event, &vars);
+	mlx_key_hook(vars.win, key_event, &vars);
 	mlx_hook(vars.win, 17, 1L >> 17, loop_end, &vars);
 	mlx_loop(vars.mlx);
 	destroy(&vars);

@@ -6,7 +6,7 @@
 /*   By: slahlou <slahlou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 11:13:34 by meudier           #+#    #+#             */
-/*   Updated: 2022/09/08 18:20:17 by slahlou          ###   ########.fr       */
+/*   Updated: 2022/09/09 11:21:36 by slahlou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,13 +104,11 @@ int	key_event(int keycode, t_vars *vars)
 {
 	if (keycode == 65293 && vars->av)
 	{
-
 		free_data(&vars->data);
 		if (!init_data(2, vars->av, &vars->data))
 			printf("--> ERROR INPUT\n");
 		else
 			vars->move = 1;
-
 	}
 	if (keycode == XK_Escape)
 		return (loop_end(vars));
