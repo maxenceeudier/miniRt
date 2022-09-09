@@ -6,7 +6,7 @@
 /*   By: meudier <meudier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 10:56:35 by meudier           #+#    #+#             */
-/*   Updated: 2022/09/09 13:44:58 by meudier          ###   ########.fr       */
+/*   Updated: 2022/09/09 18:17:05 by meudier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	free_void(void *a)
 {
 	free(a);
-	a = NULL;
 	return (0);
 }
 
@@ -24,11 +23,11 @@ int	free_data(t_data *data)
 	t_Objects	*temp;
 
 	if (data->luma)
-		free_void(data->luma);
+		free(data->luma);
 	if (data->lum)
-		free_void(data->lum);
+		free(data->lum);
 	if (data->cam)
-		free_void(data->cam);
+		free(data->cam);
 	if (data->objects)
 	{
 		while (data->objects)
@@ -37,9 +36,13 @@ int	free_data(t_data *data)
 			if (data->objects->object)
 				free(data->objects->object);
 			data->objects = data->objects->next;
-			free_void(temp);
+			free(temp);
+			temp = NULL;
 		}
 	}
+	data->lum = NULL;
+	data->luma = NULL;
+	data->cam = NULL;
 	return (0);
 }
 
