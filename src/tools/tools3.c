@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   tools3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slahlou <slahlou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: meudier <meudier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 15:24:34 by slahlou           #+#    #+#             */
-/*   Updated: 2022/09/08 16:00:34 by slahlou          ###   ########.fr       */
+/*   Updated: 2022/09/09 13:52:01 by meudier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../ft.h"
-
-
 
 char	*ft_strjoin(char *s1, char *s2)
 {
@@ -20,7 +18,6 @@ char	*ft_strjoin(char *s1, char *s2)
 	int		i;
 	int		j;
 	int		size;
-
 
 	size = ft_strlen(s1) + ft_strlen(s2);
 	i = 0;
@@ -103,7 +100,7 @@ char	*ftoa(float f)
 			str[i++] = '.';
 			str[i] = temp[i - 1];
 			i++;
-			break;
+			break ;
 		}
 		str[i] = temp[i];
 		i++;

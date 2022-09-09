@@ -6,7 +6,7 @@
 /*   By: slahlou <slahlou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 17:30:42 by meudier           #+#    #+#             */
-/*   Updated: 2022/09/09 14:20:34 by slahlou          ###   ########.fr       */
+/*   Updated: 2022/09/09 14:27:34 by slahlou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,12 @@
 # include <math.h>
 # include <stdio.h>
 # include <float.h>
-
 # define BUFFER_SIZE 100
 # define WIDTH 1280
 # define HEIGHT 690
-
-
 # define PI 3.14159265359
 # define BACK_GROUND 0x000000
 # define WHITE 0xFFFFFF
-
 
 enum e_type
 {
@@ -50,16 +46,14 @@ enum e_algo
 	NB_VEC
 };
 
-
 typedef struct s_image
 {
-
-    void    *mlx_img;
-    char    *addr;
-    int     bits_per_pix;
-    int     line_len;
-    int     endian;
-}   t_image;
+	void	*mlx_img;
+	char	*addr;
+	int		bits_per_pix;
+	int		line_len;
+	int		endian;
+}	t_image;
 
 typedef struct s_equation
 {
@@ -168,7 +162,7 @@ int			destroy(t_vars *vars);
 
 /*src/tools/split*/
 char		**ft_split(char const *s, char c);
-char	**ft_split_charset(char *str, char *charset);
+char		**ft_split_charset(char *str, char *charset);
 
 /*src/toolstools*/
 int			ft_strcmp(const char *s1, const char *s2);
@@ -193,6 +187,7 @@ char		*ft_cat_buf_to_str(char *str, char *buf, int str_len, int buf_len);
 /*src/parser/free*/
 int			free_data(t_data *data);
 int			free_tab(char **tab);
+int			free_void(void *a);
 
 /*src/parser/parser*/
 int			ft_parse_a(t_data *data, char **line_split);
@@ -225,7 +220,8 @@ t_vector	cross_product(t_vector v1, t_vector v2);
 t_vector	sub_vector(t_vector v1, t_vector v2);
 t_vector	vector_x_vector(t_vector v1, t_vector v2);
 t_vector	compute_nhit_sp(t_Sphere *sp, t_vector hit_point, t_vector cam_pos);
-t_vector	compute_nhit_cy(t_cylindre *cy, t_vector hit_point, t_vector cam_pos);
+t_vector	compute_nhit_cy(t_cylindre *cy, t_vector hit_point, \
+t_vector cam_pos);
 t_vector	compute_nhit_pl(t_plan *pl, t_vector hit_point, t_vector cam_pos);
 
 /*src/calcul/calcul2*/
@@ -240,17 +236,21 @@ t_vector	vector_x_matrix(t_vector v, t_matrix m, int i);
 void		eq_matrix(t_matrix *m1, t_matrix m2);
 
 /*src/calcul/intersection*/
-float		inter_sphere(t_vector dir_pix, t_vector cam_o, void *sp, t_vector *rslt);
-float		inter_plan(t_vector dir_pix, t_vector cam_o, void *plan, t_vector *rslt);
-float		inter_cylindre(t_vector dir_pix, t_vector cam_o, void *cylindre, t_vector *rslt);
+float		inter_sphere(t_vector dir_pix, t_vector cam_o, void *sp, \
+t_vector *rslt);
+float		inter_plan(t_vector dir_pix, t_vector cam_o, void *plan, \
+t_vector *rslt);
+float		inter_cylindre(t_vector dir_pix, t_vector cam_o, \
+void *cylindre, t_vector *rslt);
 t_vector	get_nhit_cl(t_cylindre *cl, t_vector hit_point);
 
 /*RT algo*/
-void set_img(t_image *image, t_vars *data, int w, int h);
+void		set_img(t_image *image, t_vars *data, int w, int h);
 int			img_pix_put(t_image *img, int x, int y, int color);
 void		algo(t_vars *vars);
 void		algo_shadow(t_vars *vars, t_vector hit_point, int i, int j);
 int			shift_color(t_vector color);
 void		rewind_list(t_Objects **obj);
-t_vector	loop_object_hit(t_Objects **obj, t_vector ray_dir, t_vector cam_pos, float *t_min);
+t_vector	loop_object_hit(t_Objects **obj, t_vector ray_dir, \
+t_vector cam_pos, float *t_min);
 #endif

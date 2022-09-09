@@ -3,34 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   free_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slahlou <slahlou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: meudier <meudier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 10:56:35 by meudier           #+#    #+#             */
-/*   Updated: 2022/09/09 09:27:14 by slahlou          ###   ########.fr       */
+/*   Updated: 2022/09/09 13:44:58 by meudier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../ft.h"
+
+int	free_void(void *a)
+{
+	free(a);
+	a = NULL;
+	return (0);
+}
 
 int	free_data(t_data *data)
 {
 	t_Objects	*temp;
 
 	if (data->luma)
-	{
-		free(data->luma);
-		data->luma = NULL;
-	}
+		free_void(data->luma);
 	if (data->lum)
-	{
-		free(data->lum);
-		data->lum = NULL;
-	}
+		free_void(data->lum);
 	if (data->cam)
-	{
-		free(data->cam);
-		data->cam = NULL;
-	}
+		free_void(data->cam);
 	if (data->objects)
 	{
 		while (data->objects)
@@ -39,8 +37,7 @@ int	free_data(t_data *data)
 			if (data->objects->object)
 				free(data->objects->object);
 			data->objects = data->objects->next;
-			free(temp);
-			temp = NULL;
+			free_void(temp);
 		}
 	}
 	return (0);
